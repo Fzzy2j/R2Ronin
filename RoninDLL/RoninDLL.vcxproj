@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{A509496E-470B-4510-94C9-5393879A3360}</ProjectGuid>
+    <RootNamespace>NorthstarDedicatedTest</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>RoninDLL</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <TargetName>Ronin</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <TargetName>Northstar</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;NORTHSTARDEDICATEDTEST_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions);CURL_STATICLIB</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>pch.h</ForcedIncludeFiles>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>$(SolutionDir)include\MinHook.x64.lib;$(SolutionDir)include\libcurl\lib\libcurl_a.lib;Ws2_32.lib;Crypt32.lib;Cryptui.lib;dbghelp.lib;Wldap32.lib;Normaliz.lib;Bcrypt.lib;version.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ForceSymbolReferences>
+      </ForceSymbolReferences>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>copy /Y "$(TargetPath)" "$(SolutionDir)..\..\"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;NORTHSTARDEDICATEDTEST_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions);CURL_STATICLIB</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <Optimization>Disabled</Optimization>
+      <ForcedIncludeFiles>pch.h</ForcedIncludeFiles>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>$(SolutionDir)include\MinHook.x64.lib;$(SolutionDir)include\libcurl\lib\libcurl_a.lib;Ws2_32.lib;Crypt32.lib;Cryptui.lib;dbghelp.lib;Wldap32.lib;Normaliz.lib;Bcrypt.lib;version.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ForceSymbolReferences>
+      </ForceSymbolReferences>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>IF EXIST "$(SolutionDir)..\..\Titanfall2.exe" del "$(SolutionDir)..\..\Northstar.dll" &amp;&amp; copy /Y "$(TargetPath)" "$(SolutionDir)..\..\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\openssl\__DECC_INCLUDE_EPILOGUE.H" />
+    <ClInclude Include="..\include\openssl\__DECC_INCLUDE_PROLOGUE.H" />
+    <ClInclude Include="core\convar\concommand.h" />
+    <ClInclude Include="core\convar\convar.h" />
+    <ClInclude Include="core\convar\cvar.h" />
+    <ClInclude Include="core\hooks.h" />
+    <ClInclude Include="core\macros.h" />
+    <ClInclude Include="core\math\bitbuf.h" />
+    <ClInclude Include="core\math\bits.h" />
+    <ClInclude Include="core\math\color.h" />
+    <ClInclude Include="core\math\vector.h" />
+    <ClInclude Include="core\memalloc.h" />
+    <ClInclude Include="core\memory.h" />
+    <ClInclude Include="core\sourceinterface.h" />
+    <ClInclude Include="core\structs.h" />
+    <ClInclude Include="core\tier0.h" />
+    <ClInclude Include="dllmain.h" />
+    <ClInclude Include="logging\crashhandler.h" />
+    <ClInclude Include="logging\logging.h" />
+    <ClInclude Include="logging\loghooks.h" />
+    <ClInclude Include="logging\sourceconsole.h" />
+    <ClInclude Include="ns_version.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="util\printcommands.h" />
+    <ClInclude Include="util\utils.h" />
+    <ClInclude Include="util\version.h" />
+    <ClInclude Include="util\wininfo.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="audio_asm.asm" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="core\convar\concommand.cpp" />
+    <ClCompile Include="core\convar\convar.cpp" />
+    <ClCompile Include="core\convar\cvar.cpp" />
+    <ClCompile Include="core\hooks.cpp" />
+    <ClCompile Include="core\math\bits.cpp" />
+    <ClCompile Include="core\math\color.cpp" />
+    <ClCompile Include="core\memalloc.cpp" />
+    <ClCompile Include="core\memory.cpp" />
+    <ClCompile Include="core\sourceinterface.cpp" />
+    <ClCompile Include="core\tier0.cpp" />
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="logging\crashhandler.cpp" />
+    <ClCompile Include="logging\logging.cpp" />
+    <ClCompile Include="logging\loghooks.cpp" />
+    <ClCompile Include="logging\sourceconsole.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="util\printcommands.cpp" />
+    <ClCompile Include="util\utils.cpp" />
+    <ClCompile Include="util\version.cpp" />
+    <ClCompile Include="util\wininfo.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
+  </ImportGroup>
+</Project>
