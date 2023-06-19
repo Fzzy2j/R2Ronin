@@ -120,10 +120,12 @@
   <ItemGroup>
     <ClInclude Include="..\include\openssl\__DECC_INCLUDE_EPILOGUE.H" />
     <ClInclude Include="..\include\openssl\__DECC_INCLUDE_PROLOGUE.H" />
+    <ClInclude Include="core\bindingshooks.h" />
     <ClInclude Include="core\convar\concommand.h" />
     <ClInclude Include="core\convar\convar.h" />
     <ClInclude Include="core\convar\cvar.h" />
     <ClInclude Include="core\hooks.h" />
+    <ClInclude Include="core\inputhooks.h" />
     <ClInclude Include="core\macros.h" />
     <ClInclude Include="core\math\bitbuf.h" />
     <ClInclude Include="core\math\bits.h" />
@@ -135,12 +137,14 @@
     <ClInclude Include="core\structs.h" />
     <ClInclude Include="core\tier0.h" />
     <ClInclude Include="dllmain.h" />
+    <ClInclude Include="core\framehooks.h" />
     <ClInclude Include="logging\crashhandler.h" />
     <ClInclude Include="logging\logging.h" />
     <ClInclude Include="logging\loghooks.h" />
     <ClInclude Include="logging\sourceconsole.h" />
     <ClInclude Include="ns_version.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="core\uihooks.h" />
     <ClInclude Include="util\printcommands.h" />
     <ClInclude Include="util\utils.h" />
     <ClInclude Include="util\version.h" />
@@ -150,10 +154,12 @@
     <MASM Include="audio_asm.asm" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="core\bindingshooks.cpp" />
     <ClCompile Include="core\convar\concommand.cpp" />
     <ClCompile Include="core\convar\convar.cpp" />
     <ClCompile Include="core\convar\cvar.cpp" />
     <ClCompile Include="core\hooks.cpp" />
+    <ClCompile Include="core\inputhooks.cpp" />
     <ClCompile Include="core\math\bits.cpp" />
     <ClCompile Include="core\math\color.cpp" />
     <ClCompile Include="core\memalloc.cpp" />
@@ -161,11 +167,13 @@
     <ClCompile Include="core\sourceinterface.cpp" />
     <ClCompile Include="core\tier0.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="core\framehooks.cpp" />
     <ClCompile Include="logging\crashhandler.cpp" />
     <ClCompile Include="logging\logging.cpp" />
     <ClCompile Include="logging\loghooks.cpp" />
     <ClCompile Include="logging\sourceconsole.cpp" />
     <ClCompile Include="pch.cpp" />
+    <ClCompile Include="core\uihooks.cpp" />
     <ClCompile Include="util\printcommands.cpp" />
     <ClCompile Include="util\utils.cpp" />
     <ClCompile Include="util\version.cpp" />

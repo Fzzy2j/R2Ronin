@@ -1,3 +1,209 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="core\hooks.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\memory.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\memalloc.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\tier0.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\math\bits.cpp">
+      <Filter>Source Files\core\math</Filter>
+    </ClCompile>
+    <ClCompile Include="core\math\color.cpp">
+      <Filter>Source Files\core\math</Filter>
+    </ClCompile>
+    <ClCompile Include="core\convar\concommand.cpp">
+      <Filter>Source Files\core\convar</Filter>
+    </ClCompile>
+    <ClCompile Include="core\convar\convar.cpp">
+      <Filter>Source Files\core\convar</Filter>
+    </ClCompile>
+    <ClCompile Include="core\convar\cvar.cpp">
+      <Filter>Source Files\core\convar</Filter>
+    </ClCompile>
+    <ClCompile Include="logging\crashhandler.cpp">
+      <Filter>Source Files\logging</Filter>
+    </ClCompile>
+    <ClCompile Include="logging\sourceconsole.cpp">
+      <Filter>Source Files\logging</Filter>
+    </ClCompile>
+    <ClCompile Include="logging\logging.cpp">
+      <Filter>Source Files\logging</Filter>
+    </ClCompile>
+    <ClCompile Include="logging\loghooks.cpp">
+      <Filter>Source Files\logging</Filter>
+    </ClCompile>
+    <ClCompile Include="util\printcommands.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="util\utils.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="util\version.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="util\wininfo.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\sourceinterface.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\inputhooks.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\bindingshooks.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\framehooks.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\uihooks.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\openssl\__DECC_INCLUDE_EPILOGUE.H" />
+    <ClInclude Include="..\include\openssl\__DECC_INCLUDE_PROLOGUE.H" />
+    <ClInclude Include="core\hooks.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\macros.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\memalloc.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\memory.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\sourceinterface.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\structs.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\tier0.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\math\bitbuf.h">
+      <Filter>Header Files\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="core\math\bits.h">
+      <Filter>Header Files\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="core\math\color.h">
+      <Filter>Header Files\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="core\math\vector.h">
+      <Filter>Header Files\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="core\convar\concommand.h">
+      <Filter>Header Files\core\convar</Filter>
+    </ClInclude>
+    <ClInclude Include="core\convar\convar.h">
+      <Filter>Header Files\core\convar</Filter>
+    </ClInclude>
+    <ClInclude Include="core\convar\cvar.h">
+      <Filter>Header Files\core\convar</Filter>
+    </ClInclude>
+    <ClInclude Include="logging\crashhandler.h">
+      <Filter>Header Files\logging</Filter>
+    </ClInclude>
+    <ClInclude Include="logging\logging.h">
+      <Filter>Header Files\logging</Filter>
+    </ClInclude>
+    <ClInclude Include="logging\loghooks.h">
+      <Filter>Header Files\logging</Filter>
+    </ClInclude>
+    <ClInclude Include="logging\sourceconsole.h">
+      <Filter>Header Files\logging</Filter>
+    </ClInclude>
+    <ClInclude Include="util\printcommands.h">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="util\utils.h">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="util\version.h">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="util\wininfo.h">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="dllmain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ns_version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\inputhooks.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\bindingshooks.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\framehooks.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\uihooks.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="audio_asm.asm" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{6cc2675f-a3ce-474e-98e4-a461aa430e8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core">
+      <UniqueIdentifier>{8ee5a099-023d-4fc4-9ca8-403a71113364}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\math">
+      <UniqueIdentifier>{dc9b4bd9-a4c6-4a1a-9090-e0083c69ff12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\convar">
+      <UniqueIdentifier>{ac3b48e7-93ea-4284-8863-324ac92005bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\logging">
+      <UniqueIdentifier>{a9786730-e369-4e0c-bc78-cf710e77dd24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\util">
+      <UniqueIdentifier>{df8e48c9-3c87-4944-9b85-992abd6d957b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{42621cda-d3f5-4577-b600-b06872e2a059}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core">
+      <UniqueIdentifier>{0e736eee-3991-4ab9-adbe-67efea62f117}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\math">
+      <UniqueIdentifier>{17299510-47fa-4bc9-9a2b-2683d56bf551}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\convar">
+      <UniqueIdentifier>{617b3a23-f672-4af3-8a91-02fb8516b4e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\logging">
+      <UniqueIdentifier>{4abe0cda-1556-46ce-b7c6-8a3e1dad57c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\util">
+      <UniqueIdentifier>{7fd0b5e0-f3c0-4662-9580-665e15b57322}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
 </Project>

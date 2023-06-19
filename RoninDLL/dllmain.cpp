@@ -3,6 +3,7 @@
 #include "logging/crashhandler.h"
 #include "core/memalloc.h"
 #include "util/version.h"
+#include "core/bindingshooks.h"
 
 #include "rapidjson/document.h"
 #include "rapidjson/stringbuffer.h"
@@ -12,8 +13,11 @@
 #include <string.h>
 #include <filesystem>
 
+HMODULE _module;
+
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 {
+	_module = hModule;
 	switch (ul_reason_for_call)
 	{
 	case DLL_PROCESS_ATTACH:
@@ -24,6 +28,19 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 	}
 
 	return TRUE;
+}
+
+DWORD WINAPI Thread(HMODULE hModule)
+{
+	Sleep(7000);
+
+	while (true)
+	{
+		Sleep(7000);
+
+		findBinds();
+	}
+	return 0;
 }
 
 bool InitialiseRonin()
@@ -42,6 +59,9 @@ bool InitialiseRonin()
 	// initialise logging before most other things so that they can use spdlog and it have the proper formatting
 	InitialiseLogging();
 	InitialiseVersion();
+	InitializeTF2Binds();
+
+	CloseHandle(CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)Thread, _module, 0, nullptr));
 	//CreateLogFiles();
 
 	InitialiseCrashHandler();
