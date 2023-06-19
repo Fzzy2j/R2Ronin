@@ -73,6 +73,9 @@
     <ClCompile Include="core\uihooks.cpp">
       <Filter>Source Files\core</Filter>
     </ClCompile>
+    <ClCompile Include="core\xinputhooks.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\openssl\__DECC_INCLUDE_EPILOGUE.H" />
@@ -162,6 +165,9 @@
       <Filter>Header Files\core</Filter>
     </ClInclude>
     <ClInclude Include="core\uihooks.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\xinputhooks.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
   </ItemGroup>

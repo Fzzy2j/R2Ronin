@@ -45,7 +45,6 @@ DWORD WINAPI Thread(HMODULE hModule)
 
 bool InitialiseRonin()
 {
-
 	static bool bInitialised = false;
 	if (bInitialised)
 		return false;

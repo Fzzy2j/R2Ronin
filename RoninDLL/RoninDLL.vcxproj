@@ -28,7 +28,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -51,7 +51,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>Northstar</TargetName>
+    <TargetName>Ronin</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -90,7 +90,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;NORTHSTARDEDICATEDTEST_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions);CURL_STATICLIB</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -136,6 +136,7 @@
     <ClInclude Include="core\sourceinterface.h" />
     <ClInclude Include="core\structs.h" />
     <ClInclude Include="core\tier0.h" />
+    <ClInclude Include="core\xinputhooks.h" />
     <ClInclude Include="dllmain.h" />
     <ClInclude Include="core\framehooks.h" />
     <ClInclude Include="logging\crashhandler.h" />
@@ -166,6 +167,7 @@
     <ClCompile Include="core\memory.cpp" />
     <ClCompile Include="core\sourceinterface.cpp" />
     <ClCompile Include="core\tier0.cpp" />
+    <ClCompile Include="core\xinputhooks.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="core\framehooks.cpp" />
     <ClCompile Include="logging\crashhandler.cpp" />

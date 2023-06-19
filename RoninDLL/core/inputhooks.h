@@ -4,14 +4,6 @@
 #include "core/bindingshooks.h"
 #include <vector>
 
-struct ControllerInputHolder
-{
-	int buttonIndex;
-
-	bool waitingToSend;
-	long long timestamp;
-};
-
 enum SRMM_settings
 {
 	SRMM_ENABLE_SPEEDOMETER,
