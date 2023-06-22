@@ -1,6 +1,7 @@
 #pragma once
 #include "spdlog/sinks/base_sink.h"
 #include "spdlog/logger.h"
+#include "squirrel/squirrel.h"
 #include "core/math/color.h"
 
 void CreateLogFiles();

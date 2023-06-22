@@ -26,11 +26,11 @@ void TryCreateGlobalMemAlloc()
 ON_DLL_LOAD("tier0.dll", Tier0GameFuncs, (CModule module))
 {
 	// shouldn't be necessary, but do this just in case
-	/* TryCreateGlobalMemAlloc();
+	TryCreateGlobalMemAlloc();
 
 	// setup tier0 funcs
 	Tier0::Error = module.GetExport("Error").As<Tier0::ErrorType>();
 	Tier0::CommandLine = module.GetExport("CommandLine").As<Tier0::CommandLineType>();
 	Tier0::Plat_FloatTime = module.GetExport("Plat_FloatTime").As<Tier0::Plat_FloatTimeType>();
-	Tier0::ThreadInServerFrameThread = module.GetExport("ThreadInServerFrameThread").As<Tier0::ThreadInServerFrameThreadType>();*/
+	Tier0::ThreadInServerFrameThread = module.GetExport("ThreadInServerFrameThread").As<Tier0::ThreadInServerFrameThreadType>();
 }

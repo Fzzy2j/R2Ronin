@@ -1,4 +1,8 @@
 #include "concommand.h"
+#include "shared/misccommands.h"
+#include "engine/r2engine.h"
+
+#include "plugins/pluginbackend.h"
 
 #include <iostream>
 
@@ -145,7 +149,7 @@ void RegisterConCommand(
 ON_DLL_LOAD("engine.dll", ConCommand, (CModule module))
 {
 	ConCommandConstructor = module.Offset(0x415F60).As<ConCommandConstructorType>();
-	//AddMiscConCommands();
+	AddMiscConCommands();
 
-	//g_pPluginCommunicationhandler->m_sEngineData.ConCommandConstructor = ConCommandConstructor;
+	g_pPluginCommunicationhandler->m_sEngineData.ConCommandConstructor = ConCommandConstructor;
 }

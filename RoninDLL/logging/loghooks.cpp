@@ -3,7 +3,9 @@
 #include "core/convar/convar.h"
 #include "core/convar/concommand.h"
 #include "core/math/bitbuf.h"
+#include "config/profile.h"
 #include "core/tier0.h"
+#include "squirrel/squirrel.h"
 #include <iomanip>
 #include <sstream>
 
@@ -102,7 +104,7 @@ void,, (BFRead* msg))
 }
 
 // clang-format off
-/*AUTOHOOK(Hook_fprintf, engine.dll + 0x51B1F0,
+AUTOHOOK(Hook_fprintf, engine.dll + 0x51B1F0,
 int,, (void* const stream, const char* const format, ...))
 // clang-format on
 {
@@ -121,7 +123,7 @@ int,, (void* const stream, const char* const format, ...))
 
 	va_end(va);
 	return 0;
-}*/
+}
 
 // clang-format off
 AUTOHOOK(ConCommand_echo, engine.dll + 0x123680,

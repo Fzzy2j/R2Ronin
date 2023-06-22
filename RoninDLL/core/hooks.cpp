@@ -1,3 +1,5 @@
+#include "dedicated/dedicated.h"
+
 #include <iostream>
 #include <wchar.h>
 #include <iostream>
@@ -184,12 +186,16 @@ void AddDllLoadCallback(std::string dll, DllLoadCallbackFuncType callback, std::
 void AddDllLoadCallbackForDedicatedServer(
 	std::string dll, DllLoadCallbackFuncType callback, std::string tag, std::vector<std::string> reliesOn)
 {
+	if (!IsDedicatedServer())
+		return;
 
 	AddDllLoadCallback(dll, callback, tag, reliesOn);
 }
 
 void AddDllLoadCallbackForClient(std::string dll, DllLoadCallbackFuncType callback, std::string tag, std::vector<std::string> reliesOn)
 {
+	if (IsDedicatedServer())
+		return;
 
 	AddDllLoadCallback(dll, callback, tag, reliesOn);
 }

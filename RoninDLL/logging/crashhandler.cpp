@@ -1,5 +1,8 @@
 #include "crashhandler.h"
+#include "dedicated/dedicated.h"
+#include "config/profile.h"
 #include "util/version.h"
+#include "mods/modmanager.h"
 
 #include <minidumpapiset.h>
 
@@ -27,6 +30,17 @@ void PrintExceptionLog(ExceptionLog& exc)
 	// General crash message
 	spdlog::error("Ronin version: {}", version);
 	spdlog::error("Ronin has crashed! a minidump has been written and exception info is available below:");
+	if (g_pModManager)
+	{
+		spdlog::error("Loaded mods: ");
+		for (const auto& mod : g_pModManager->m_LoadedMods)
+		{
+			if (mod.m_bEnabled)
+			{
+				spdlog::error("{} {}", mod.Name, mod.Version);
+			}
+		}
+	}
 	spdlog::error(exc.cause);
 	// If this was a runtime error, print the message
 	if (exc.runtimeInfo.length() != 0)
@@ -50,6 +64,13 @@ void PrintExceptionLog(ExceptionLog& exc)
 	spdlog::error("");
 	for (const auto& reg : exc.registerDump)
 		spdlog::error(reg);
+
+	if (!IsDedicatedServer())
+		MessageBoxA(
+			0,
+			"Ronin has crashed! Crash info can be found in R2Ronin/logs",
+			"Ronin has crashed!",
+			MB_ICONERROR | MB_OK | MB_SYSTEMMODAL);
 
 	NS::log::FlushLoggers();
 }
@@ -216,6 +237,7 @@ void CreateMiniDump(EXCEPTION_POINTERS* exceptionInfo)
 	time_t time = std::time(nullptr);
 	tm currentTime = *std::localtime(&time);
 	std::stringstream stream;
+	stream << std::put_time(&currentTime, (GetRoninPrefix() + "/logs/nsdump%Y-%m-%d %H-%M-%S.dmp").c_str());
 
 	auto hMinidumpFile = CreateFileA(stream.str().c_str(), GENERIC_WRITE, FILE_SHARE_READ, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
 	if (hMinidumpFile)

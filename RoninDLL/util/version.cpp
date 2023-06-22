@@ -1,5 +1,6 @@
 #include "util/version.h"
 #include "ns_version.h"
+#include "dedicated/dedicated.h"
 
 char version[16];
 char NSUserAgent[256];
@@ -34,6 +35,9 @@ void InitialiseVersion()
 			ronin_version[1],
 			ronin_version[2]);
 	}
+
+	if (IsDedicatedServer())
+		ua_len += snprintf(NSUserAgent + ua_len, sizeof(NSUserAgent) - ua_len, " (Dedicated)");
 
 	// Add the host platform info to the user agent.
 	//

@@ -2,8 +2,15 @@
 #include "logging/logging.h"
 #include "logging/crashhandler.h"
 #include "core/memalloc.h"
+#include "config/profile.h"
+#include "plugins/plugin_abi.h"
+#include "plugins/plugins.h"
 #include "util/version.h"
-#include "core/bindingshooks.h"
+#include "squirrel/squirrel.h"
+#include "shared/gamepresence.h"
+#include "server/serverpresence.h"
+
+#include "ckf/bindingshooks.h"
 
 #include "rapidjson/document.h"
 #include "rapidjson/stringbuffer.h"
@@ -17,10 +24,10 @@ HMODULE _module;
 
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 {
-	_module = hModule;
 	switch (ul_reason_for_call)
 	{
 	case DLL_PROCESS_ATTACH:
+		_module = hModule;
 	case DLL_THREAD_ATTACH:
 	case DLL_THREAD_DETACH:
 	case DLL_PROCESS_DETACH:
@@ -33,7 +40,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 DWORD WINAPI Thread(HMODULE hModule)
 {
 	Sleep(7000);
-
+	InitializeTF2Binds();
 	while (true)
 	{
 		Sleep(7000);
@@ -51,34 +58,33 @@ bool InitialiseRonin()
 
 	bInitialised = true;
 
-	//InitialiseRoninPrefix();
+	InitialiseRoninPrefix();
 
 	// initialise the console if needed (-ronin needs this)
 	InitialiseConsole();
 	// initialise logging before most other things so that they can use spdlog and it have the proper formatting
 	InitialiseLogging();
 	InitialiseVersion();
-	InitializeTF2Binds();
+	CreateLogFiles();
 
 	CloseHandle(CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)Thread, _module, 0, nullptr));
-	//CreateLogFiles();
 
 	InitialiseCrashHandler();
 
 	// Write launcher version to log
 	spdlog::info("RoninLauncher version: {}", version);
 	spdlog::info("Command line: {}", GetCommandLineA());
-	//spdlog::info("Using profile: {}", GetRoninPrefix());
+	spdlog::info("Using profile: {}", GetRoninPrefix());
 
 	InstallInitialHooks();
 
-	//g_pServerPresence = new ServerPresenceManager();
+	g_pServerPresence = new ServerPresenceManager();
 
-	//g_pGameStatePresence = new GameStatePresence();
-	//g_pPluginManager = new PluginManager();
-	//g_pPluginManager->LoadPlugins();
+	g_pGameStatePresence = new GameStatePresence();
+	g_pPluginManager = new PluginManager();
+	g_pPluginManager->LoadPlugins();
 
-	//InitialiseSquirrelManagers();
+	InitialiseSquirrelManagers();
 
 	// Fix some users' failure to connect to respawn datacenters
 	//SetEnvironmentVariableA("OPENSSL_ia32cap", "~0x200000200000000");
