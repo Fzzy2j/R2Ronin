@@ -1,7 +1,7 @@
 #pragma once
 #include <Windows.h>
 #include <Xinput.h>
-#include "ckf/bindingshooks.h"
+#include "fzzy/ckf/bindingshooks.h"
 #include <vector>
 
 enum InputEventType_t
@@ -54,14 +54,4 @@ extern POSTEVENT hookedPostEvent;
 const long long CROUCHKICK_BUFFERING = 8;
 
 void spoofPostEvent(InputEventType_t, int, ButtonCode_t, ButtonCode_t, int);
-
-void setInputHooks();
-void hookD3DPresent();
-void enableInputHooks();
-void disableInputHooks();
-
-bool FindDMAAddy(uintptr_t, std::vector<unsigned int>, uintptr_t&);
-uintptr_t FindAddress(uintptr_t, std::vector<unsigned int>);
-uintptr_t FindAddress(uintptr_t);
-//bool IsMemoryReadable(const uintptr_t);
-bool SRMM_GetSetting(int);
+void CKF_FrameUpdate(double flCurrentTime, float flFrameTime);

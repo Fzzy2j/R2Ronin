@@ -1,7 +1,7 @@
 #include <Windows.h>
-#include "ckf/bindingshooks.h"
+#include "fzzy/ckf/bindingshooks.h"
 #include <iostream>
-#include "ckf/inputhooks.h"
+#include "fzzy/ckf/inputhooks.h"
 
 using namespace std;
 

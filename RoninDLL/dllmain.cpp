@@ -10,7 +10,7 @@
 #include "shared/gamepresence.h"
 #include "server/serverpresence.h"
 
-#include "ckf/bindingshooks.h"
+#include "fzzy/ckf/bindingshooks.h"
 
 #include "rapidjson/document.h"
 #include "rapidjson/stringbuffer.h"

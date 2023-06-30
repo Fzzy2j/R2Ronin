@@ -181,11 +181,23 @@
     <Filter Include="Header Files\shared\exploit_fixes">
       <UniqueIdentifier>{1a377c09-bd3d-4757-b3bc-9cd0a1e6ac0d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\ckf">
+    <Filter Include="Source Files\fzzy">
+      <UniqueIdentifier>{67df10ca-7385-4f55-b83d-3ad4793cf734}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fzzy\ckf">
       <UniqueIdentifier>{199d9ee1-a904-45ef-a54c-053b7cd7e1cd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\ckf">
+    <Filter Include="Source Files\fzzy\tas">
+      <UniqueIdentifier>{e067ac18-f80b-4105-9588-72551760535e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fzzy">
+      <UniqueIdentifier>{61720dbd-ceab-4ce7-a7fb-15673ea6993c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fzzy\ckf">
       <UniqueIdentifier>{0ec8bd76-a0ee-4de1-a4fc-38f525d7d7b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fzzy\tas">
+      <UniqueIdentifier>{38838e1a-cb79-44c4-83ca-466b031be758}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1191,14 +1203,20 @@
     <ClInclude Include="dedicated\dedicatedlogtoclient.h">
       <Filter>Header Files\dedicated</Filter>
     </ClInclude>
-    <ClInclude Include="ckf\bindingshooks.h">
-      <Filter>Header Files\ckf</Filter>
+    <ClInclude Include="fzzy\ckf\bindingshooks.h">
+      <Filter>Header Files\fzzy\ckf</Filter>
     </ClInclude>
-    <ClInclude Include="ckf\inputhooks.h">
-      <Filter>Header Files\ckf</Filter>
+    <ClInclude Include="fzzy\ckf\inputhooks.h">
+      <Filter>Header Files\fzzy\ckf</Filter>
     </ClInclude>
-    <ClInclude Include="ckf\xinputhooks.h">
-      <Filter>Header Files\ckf</Filter>
+    <ClInclude Include="fzzy\ckf\xinputhooks.h">
+      <Filter>Header Files\fzzy\ckf</Filter>
+    </ClInclude>
+    <ClInclude Include="fzzy\tas\tasinputhooks.h">
+      <Filter>Header Files\fzzy\tas</Filter>
+    </ClInclude>
+    <ClInclude Include="fzzy\speedmod.h">
+      <Filter>Header Files\fzzy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1465,14 +1483,20 @@
     <ClCompile Include="server\servernethooks.cpp">
       <Filter>Source Files\server</Filter>
     </ClCompile>
-    <ClCompile Include="ckf\bindingshooks.cpp">
-      <Filter>Source Files\ckf</Filter>
+    <ClCompile Include="fzzy\ckf\bindingshooks.cpp">
+      <Filter>Source Files\fzzy\ckf</Filter>
     </ClCompile>
-    <ClCompile Include="ckf\inputhooks.cpp">
-      <Filter>Source Files\ckf</Filter>
+    <ClCompile Include="fzzy\ckf\inputhooks.cpp">
+      <Filter>Source Files\fzzy\ckf</Filter>
     </ClCompile>
-    <ClCompile Include="ckf\xinputhooks.cpp">
-      <Filter>Source Files\ckf</Filter>
+    <ClCompile Include="fzzy\ckf\xinputhooks.cpp">
+      <Filter>Source Files\fzzy\ckf</Filter>
+    </ClCompile>
+    <ClCompile Include="fzzy\tas\tasinputhooks.cpp">
+      <Filter>Source Files\fzzy\tas</Filter>
+    </ClCompile>
+    <ClCompile Include="fzzy\speedmod.cpp">
+      <Filter>Source Files\fzzy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

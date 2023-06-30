@@ -1,5 +1,6 @@
-#include "ckf/xinputhooks.h"
-#include "ckf/inputhooks.h"
+#include "fzzy/ckf/xinputhooks.h"
+#include "fzzy/ckf/inputhooks.h"
+#include "fzzy/tas/tasinputhooks.h"
 
 ControllerInputHolder controllerJumpPressHolder;
 ControllerInputHolder controllerCrouchPressHolder;
@@ -16,7 +17,7 @@ AUTOHOOK_PROCADDRESS(_XInputGetState, XInput1_4.dll, XInputGetState, DWORD, WINA
 	DWORD toReturn = _XInputGetState(dwUserIndex, pState);
 
 	// if (SRMM_GetSetting(SRMM_TAS_MODE))
-	// TASProcessXInput(pState);
+	TASProcessXInput(pState);
 
 	// pState->Gamepad.sThumbLX = (short)32767;
 	// m_sourceConsole->Print(("LY IMMEDIATE: " + to_string(pState->Gamepad.sThumbLY) + "\n").c_str());

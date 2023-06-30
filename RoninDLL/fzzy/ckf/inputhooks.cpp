@@ -1,5 +1,5 @@
-#include "ckf/inputhooks.h"
-#include "ckf/bindingshooks.h"
+#include "fzzy/ckf/bindingshooks.h"
+#include "fzzy/tas/tasinputhooks.h"
 #include "logging/sourceconsole.h"
 #include <string>
 
@@ -7,8 +7,128 @@ InputHolder jumpPressHolder;
 InputHolder jumpReleaseHolder;
 InputHolder crouchPressHolder;
 InputHolder crouchReleaseHolder;
+ConVar* Cvar_fzzy_enableCkf;
 
 POSTEVENT hookedPostEvent = nullptr;
+
+void spoofPostEvent(InputEventType_t nType, int nTick, ButtonCode_t scanCode, ButtonCode_t virtualCode, int data3)
+{
+	uintptr_t moduleBase = (uintptr_t)GetModuleHandleW(L"inputsystem.dll");
+	hookedPostEvent(moduleBase + 0x69F40, nType, nTick, scanCode, virtualCode, data3);
+}
+
+void CKF_FrameUpdate(double flCurrentTime, float flFrameTime)
+{
+	framesSinceJump++;
+
+	if (superglideCrouchFrame == 0)
+	{
+		hookedPostEvent(
+			crouchPressHolder.a,
+			crouchPressHolder.nType,
+			crouchPressHolder.nTick,
+			crouchPressHolder.scanCode,
+			crouchPressHolder.virtualCode,
+			crouchPressHolder.data3);
+	}
+	if (superglideCrouchFrame >= 0)
+		superglideCrouchFrame--;
+
+	if (jumpPressHolder.waitingToSend)
+	{
+		struct timespec ts;
+		timespec_get(&ts, TIME_UTC);
+		long long real = (ts.tv_nsec / 1000000) + (ts.tv_sec * 1000);
+		long sinceJump = real - jumpPressHolder.timestamp;
+		long sinceCrouch = real - crouchPressHolder.timestamp;
+
+		if (sinceJump > CROUCHKICK_BUFFERING)
+		{
+			jumpPressHolder.waitingToSend = false;
+			hookedPostEvent(
+				jumpPressHolder.a,
+				jumpPressHolder.nType,
+				jumpPressHolder.nTick,
+				jumpPressHolder.scanCode,
+				jumpPressHolder.virtualCode,
+				jumpPressHolder.data3);
+
+			long long e = sinceCrouch - sinceJump;
+			framesSinceJump = 0;
+
+			if (e < 100)
+			{
+				NS::log::FZZY->info(("not crouchkick: " + std::to_string(e) + "ms JUMP IS EARLY").c_str());
+			}
+		}
+	}
+	if (jumpReleaseHolder.waitingToSend)
+	{
+		struct timespec ts;
+		timespec_get(&ts, TIME_UTC);
+		long long real = (ts.tv_nsec / 1000000) + (ts.tv_sec * 1000);
+		long sinceJump = real - jumpReleaseHolder.timestamp;
+
+		if (sinceJump > CROUCHKICK_BUFFERING)
+		{
+			jumpReleaseHolder.waitingToSend = false;
+			hookedPostEvent(
+				jumpReleaseHolder.a,
+				jumpReleaseHolder.nType,
+				jumpReleaseHolder.nTick,
+				jumpReleaseHolder.scanCode,
+				jumpReleaseHolder.virtualCode,
+				jumpReleaseHolder.data3);
+		}
+	}
+
+	if (crouchPressHolder.waitingToSend)
+	{
+		struct timespec ts;
+		timespec_get(&ts, TIME_UTC);
+		long long real = (ts.tv_nsec / 1000000) + (ts.tv_sec * 1000);
+		long sinceCrouch = real - crouchPressHolder.timestamp;
+		long sinceJump = real - jumpPressHolder.timestamp;
+
+		if (sinceCrouch > CROUCHKICK_BUFFERING)
+		{
+			crouchPressHolder.waitingToSend = false;
+			hookedPostEvent(
+				crouchPressHolder.a,
+				crouchPressHolder.nType,
+				crouchPressHolder.nTick,
+				crouchPressHolder.scanCode,
+				crouchPressHolder.virtualCode,
+				crouchPressHolder.data3);
+
+			long long e = sinceJump - sinceCrouch;
+
+			if (e < 100)
+			{
+				NS::log::FZZY->info(("not crouchkick: " + std::to_string(e) + "ms CROUCH IS EARLY").c_str());
+			}
+		}
+	}
+	if (crouchReleaseHolder.waitingToSend)
+	{
+		struct timespec ts;
+		timespec_get(&ts, TIME_UTC);
+		long long real = (ts.tv_nsec / 1000000) + (ts.tv_sec * 1000);
+		long sinceCrouch = real - crouchReleaseHolder.timestamp;
+
+		if (sinceCrouch > CROUCHKICK_BUFFERING)
+		{
+			crouchReleaseHolder.waitingToSend = false;
+			hookedPostEvent(
+				crouchReleaseHolder.a,
+				crouchReleaseHolder.nType,
+				crouchReleaseHolder.nTick,
+				crouchReleaseHolder.scanCode,
+				crouchReleaseHolder.virtualCode,
+				crouchReleaseHolder.data3);
+		}
+	}
+}
 
 int framesSinceJump = 0;
 int superglideCrouchFrame = -1;
@@ -23,11 +143,11 @@ AUTOHOOK(
 	(uintptr_t a, InputEventType_t nType, int nTick, ButtonCode_t scanCode, ButtonCode_t virtualCode, int data3))
 {
 	hookedPostEvent = PostEvent;
-	try
+	ButtonCode_t key = scanCode;
+	if (TASProcessInput(a, nType, nTick, scanCode, virtualCode, data3))
+		return 0;
+	if (Cvar_fzzy_enableCkf->GetBool())
 	{
-		ButtonCode_t key = scanCode;
-		// if (SRMM_GetSetting(SRMM_TAS_MODE) && TASProcessInput(a, nType, nTick, scanCode, virtualCode, data3))
-		// return 0;
 		if (nType == IE_ButtonPressed)
 		{
 			if ((key == jumpBinds[0] || key == jumpBinds[1]) && !jumpPressHolder.waitingToSend)
@@ -162,9 +282,6 @@ AUTOHOOK(
 			}
 		}
 	}
-	catch (...)
-	{
-	}
 	uintptr_t moduleBase = (uintptr_t)GetModuleHandleW(L"inputsystem.dll");
 	unsigned int toReturn = PostEvent(moduleBase + 0x69F40, nType, nTick, scanCode, virtualCode, data3);
 	return toReturn;
@@ -173,4 +290,6 @@ AUTOHOOK(
 ON_DLL_LOAD_CLIENT("inputsystem.dll", InputHooks, (CModule module))
 {
 	AUTOHOOK_DISPATCH()
+
+	Cvar_fzzy_enableCkf = new ConVar("fzzy_enableCkf", "1", FCVAR_NONE, "Controls whether CKF is enabled or not");
 }

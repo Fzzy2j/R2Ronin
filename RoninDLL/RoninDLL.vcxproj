@@ -391,9 +391,9 @@
     <ClInclude Include="..\include\spdlog\stopwatch.h" />
     <ClInclude Include="..\include\spdlog\tweakme.h" />
     <ClInclude Include="..\include\spdlog\version.h" />
-    <ClInclude Include="ckf\bindingshooks.h" />
-    <ClInclude Include="ckf\inputhooks.h" />
-    <ClInclude Include="ckf\xinputhooks.h" />
+    <ClInclude Include="fzzy\ckf\bindingshooks.h" />
+    <ClInclude Include="fzzy\ckf\inputhooks.h" />
+    <ClInclude Include="fzzy\ckf\xinputhooks.h" />
     <ClInclude Include="client\audio.h" />
     <ClInclude Include="client\localchatwriter.h" />
     <ClInclude Include="client\r2client.h" />
@@ -420,6 +420,7 @@
     <ClInclude Include="engine\hoststate.h" />
     <ClInclude Include="engine\r2engine.h" />
     <ClInclude Include="exploit_fixes\ns_limits.h" />
+    <ClInclude Include="fzzy\speedmod.h" />
     <ClInclude Include="hooks\hooks.h" />
     <ClInclude Include="hooks\maxplayers.h" />
     <ClInclude Include="hooks\memalloc.h" />
@@ -451,6 +452,7 @@
     <ClInclude Include="squirrel\squirrelautobind.h" />
     <ClInclude Include="squirrel\squirrelclasstypes.h" />
     <ClInclude Include="squirrel\squirreldatatypes.h" />
+    <ClInclude Include="fzzy\tas\tasinputhooks.h" />
     <ClInclude Include="util\utils.h" />
     <ClInclude Include="util\version.h" />
     <ClInclude Include="util\wininfo.h" />
@@ -459,9 +461,9 @@
     <None Include="..\include\spdlog\fmt\bundled\LICENSE.rst" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ckf\bindingshooks.cpp" />
-    <ClCompile Include="ckf\inputhooks.cpp" />
-    <ClCompile Include="ckf\xinputhooks.cpp" />
+    <ClCompile Include="fzzy\ckf\bindingshooks.cpp" />
+    <ClCompile Include="fzzy\ckf\inputhooks.cpp" />
+    <ClCompile Include="fzzy\ckf\xinputhooks.cpp" />
     <ClCompile Include="client\audio.cpp" />
     <ClCompile Include="client\chatcommand.cpp" />
     <ClCompile Include="client\clientauthhooks.cpp" />
@@ -499,6 +501,7 @@
     <ClCompile Include="engine\hoststate.cpp" />
     <ClCompile Include="engine\r2engine.cpp" />
     <ClCompile Include="engine\runframe.cpp" />
+    <ClCompile Include="fzzy\speedmod.cpp" />
     <ClCompile Include="logging\crashhandler.cpp" />
     <ClCompile Include="logging\logging.cpp" />
     <ClCompile Include="logging\loghooks.cpp" />
@@ -547,6 +550,7 @@
     <ClCompile Include="shared\playlist.cpp" />
     <ClCompile Include="squirrel\squirrel.cpp" />
     <ClCompile Include="squirrel\squirrelautobind.cpp" />
+    <ClCompile Include="fzzy\tas\tasinputhooks.cpp" />
     <ClCompile Include="util\printcommands.cpp" />
     <ClCompile Include="util\printmaps.cpp" />
     <ClCompile Include="util\utils.cpp" />
