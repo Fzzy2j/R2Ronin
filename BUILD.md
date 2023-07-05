@@ -1,7 +1,5 @@
 # Build Instructions
-The following steps will allow you to compile your own RoninLauncher executable from the code in this repository. If you still have questions, you may ask in the [Discord Server](https://discord.gg/Ronin)
-
-*This guide assumes you have already installed Ronin as shown in [this page](https://r2Ronin.gitbook.io/r2Ronin-wiki/installing-Ronin/basic-setup)*
+The following steps will allow you to compile your own RoninLauncher executable from the code in this repository. If you still have questions, you may ask in the [Discord Server](https://discord.gg/P3JKjfx4uZ)
 
 ### Steps
 1. **Download the code** from the [R2Ronin/RoninLauncher](https://github.com/R2Ronin/RoninLauncher) repo
